@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Coin Game</title>
+    <title>Click Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
+<body style="text-align:center; font-family:sans-serif;">
 
     <h1>💰 Coin: <span id="coin">0</span></h1>
 
-    <img src="coin.png" id="coinImg" width="250">
+    <button onclick="tap()" id="coin-btn">
+        <img src="coin.png" alt="Tanga" id="coin-img">
+    </button>
 
     <br><br>
 
-    <button id="upgradeBtn">UPGRADE 🚀</button>
+    <button onclick="upgrade()">UPGRADE 🚀</button>
 
     <script src="js.js"></script>
-
-    <script>
-        // click eventlarni JS bilan bog‘laymiz
-        document.getElementById("coinImg").onclick = tap;
-        document.getElementById("upgradeBtn").onclick = upgrade;
-    </script>
-
 </body>
+
 </html>
