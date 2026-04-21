@@ -1,34 +1,29 @@
-let coin = localStorage.getItem("coin") || 0;
-let power = localStorage.getItem("power") || 1;
+let coin = Number(localStorage.getItem("coin")) || 0;
+let power = Number(localStorage.getItem("power")) || 1;
 
-coin = Number(coin);
-power = Number(power);
-
-function update() {
+// Sahifa yuklanganda sonni ko'rsatish
+window.onload = function() {
     document.getElementById("coin").innerText = coin;
+};
 
+function updateCoin() {
+    document.getElementById("coin").innerText = coin;
+    // XOTIRAGA SAQLASH
     localStorage.setItem("coin", coin);
     localStorage.setItem("power", power);
 }
 
 function tap() {
     coin += power;
-    update();
+    updateCoin();
 }
 
 function upgrade() {
-    let cost = power * 10;
-
-    if (coin >= cost) {
-        coin -= cost;
+    if (coin >= 10) {
+        coin -= 10;
         power++;
-        update();
+        updateCoin();
     } else {
         alert("Coin yetarli emas!");
     }
 }
-
-document.getElementById("coinImg").onclick = tap;
-document.getElementById("upgradeBtn").onclick = upgrade;
-
-update();
