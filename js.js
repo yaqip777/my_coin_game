@@ -1,8 +1,18 @@
-let score = 0;
+// 1. O'yinni boshlaganda saqlangan ballni yuklab olamiz
+// Agar saqlangan ball bo'lmasa, 0 deb oladi
+let score = localStorage.getItem('userScore') ? parseInt(localStorage.getItem('userScore')) : 0;
+
+// Sahifa yuklanganda ekranda saqlangan ballni ko'rsatish
+document.getElementById('coin').innerText = score;
 
 function tap(event) {
     score++;
+    
+    // Ekranda yangilash
     document.getElementById('coin').innerText = score;
+
+    // 2. Ballni brauzer xotirasiga (LocalStorage) saqlash
+    localStorage.setItem('userScore', score);
 
     // Effekt chiqarish funksiyasi
     createScoreEffect(event);
@@ -13,7 +23,6 @@ function createScoreEffect(event) {
     effect.innerText = '+1';
     effect.className = 'score-animation';
 
-    // Bosilgan joyni aniqlash (Telefon va Kompyuter uchun)
     let x, y;
     if (event.touches && event.touches.length > 0) {
         x = event.touches[0].clientX;
