@@ -1,6 +1,7 @@
 * {
     -webkit-tap-highlight-color: transparent;
 }
+
 #coin-btn {
     background: none;
     border: none;
@@ -11,32 +12,27 @@
 }
 
 #coin-img {
-    width: 250px; /* Tanganing kattaligi */
+    width: 250px;
     height: 250px;
     object-fit: contain;
 }
 
-/* Tanga bosilganda effekt */
 #coin-btn:active {
     transform: scale(0.9);
 }
+
+/* +1 effekti uchun animatsiya */
 .score-animation {
     position: absolute;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    color: #ffd700; /* Tilla rang */
-    pointer-events: none; /* Yozuv bosishga xalaqit bermasligi uchun */
+    color: #ffd700;
+    pointer-events: none;
     animation: moveUp 0.8s ease-out forwards;
     z-index: 1000;
 }
 
 @keyframes moveUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-120px); opacity: 0; }
 }
