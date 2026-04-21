@@ -1,20 +1,19 @@
-/* Bu tugmaning umumiy ko'rinishi */
-button {
-    width: 200px;
-    height: 200px;
-    transition: transform 0.1s ease;
-    border-radius: 50%; /* Tugmani yumaloq qiladi */
-    background: radial-gradient(circle, #f39c12, #d35400); /* Hamster rangiga yaqin */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+#coin-btn {
+    background: none;
     border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
     outline: none;
+    cursor: pointer;
+    transition: transform 0.1s;
+    margin-top: 50px;
 }
 
-/* Bu siz yozgan kod - bosilgandagi effekt */
-button:active {
+#coin-img {
+    width: 250px; /* Tanganing kattaligi */
+    height: 250px;
+    object-fit: contain;
+}
+
+/* Tanga bosilganda effekt */
+#coin-btn:active {
     transform: scale(0.9);
 }
