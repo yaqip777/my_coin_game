@@ -9,7 +9,7 @@
 
     <h1>💰 Coin: <span id="coin">0</span></h1>
 
-    <button onclick="addCoin()" style="font-size:30px; padding: 20px;">
+    <button onclick="tap()" style="font-size:30px; padding: 20px;">
         TAP 💥
     </button>
 
@@ -17,26 +17,6 @@
 
     <button onclick="upgrade()">UPGRADE 🚀</button>
 
-    <script>
-        let coin = 0;
-        let power = 1; // Har bosganda qancha qo'shilishi
-
-        function addCoin() {
-            coin += power;
-            document.getElementById("coin").innerText = coin;
-        }
-
-        function upgrade() {
-            if (coin >= 10) { // Masalan, upgrade 10 coin turadi
-                coin -= 10;
-                power += 1;
-                document.getElementById("coin").innerText = coin;
-                alert("Upgrade qilindi! Endi har bosishda " + power + " coin!");
-            } else {
-                alert("Coin yetarli emas!");
-            }
-        }
-    </script>
-
+    <script src="js.js"></script>
 </body>
 </html>
