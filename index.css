@@ -1,22 +1,20 @@
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-#coin-btn {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    transition: transform 0.1s;
-    margin-top: 50px;
+.click-animation {
+    position: absolute;
+    color: #ffd700; /* Oltin rang */
+    font-size: 24px;
+    font-weight: bold;
+    pointer-events: none; /* Sichqoncha ta'sir qilmasligi uchun */
+    animation: moveUp 0.8s ease-out forwards;
+    z-index: 100;
 }
 
-#coin-img {
-    width: 250px; /* Tanganing kattaligi */
-    height: 250px;
-    object-fit: contain;
-}
-
-/* Tanga bosilganda effekt */
-#coin-btn:active {
-    transform: scale(0.9);
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
 }
