@@ -1,20 +1,24 @@
-// 1. O'yinni boshlaganda saqlangan ballni yuklab olamiz
-// Agar saqlangan ball bo'lmasa, 0 deb oladi
-let score = localStorage.getItem('userScore') ? parseInt(localStorage.getItem('userScore')) : 0;
+// Telegram Web App API ni ishga tushiramiz
+const tg = window.Telegram.WebApp;
+tg.expand(); // O'yinni to'liq ekranga yoyish
 
-// Sahifa yuklanganda ekranda saqlangan ballni ko'rsatish
-document.getElementById('coin').innerText = score;
+let score = 0;
+
+// 1. Telegram bazasidan ballni yuklab olish
+tg.CloudStorage.getItem('userScore', (err, value) => {
+    if (!err && value) {
+        score = parseInt(value);
+        document.getElementById('coin').innerText = score;
+    }
+});
 
 function tap(event) {
     score++;
-    
-    // Ekranda yangilash
     document.getElementById('coin').innerText = score;
 
-    // 2. Ballni brauzer xotirasiga (LocalStorage) saqlash
-    localStorage.setItem('userScore', score);
+    // 2. Ballni Telegram CloudStorage-ga saqlash
+    tg.CloudStorage.setItem('userScore', score.toString());
 
-    // Effekt chiqarish funksiyasi
     createScoreEffect(event);
 }
 
@@ -23,25 +27,16 @@ function createScoreEffect(event) {
     effect.innerText = '+1';
     effect.className = 'score-animation';
 
-    let x, y;
-    if (event.touches && event.touches.length > 0) {
-        x = event.touches[0].clientX;
-        y = event.touches[0].clientY;
-    } else {
-        x = event.clientX;
-        y = event.clientY;
-    }
+    let x = (event.touches && event.touches[0]) ? event.touches[0].clientX : event.clientX;
+    let y = (event.touches && event.touches[0]) ? event.touches[0].clientY : event.clientY;
 
     effect.style.left = x + 'px';
     effect.style.top = y + 'px';
 
     document.body.appendChild(effect);
-
-    setTimeout(() => {
-        effect.remove();
-    }, 800);
+    setTimeout(() => effect.remove(), 800);
 }
 
 function upgrade() {
-    alert("Tez orada yangi funksiyalar qo'shiladi!");
+    tg.showAlert("Upgrade tizimi tez orada ishga tushadi! Hozircha ball yig'ishda davom eting.");
 }
