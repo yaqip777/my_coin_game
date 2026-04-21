@@ -1,3 +1,6 @@
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 #coin-btn {
     background: none;
     border: none;
