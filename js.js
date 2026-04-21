@@ -4,7 +4,7 @@ function tap(event) {
     score++;
     document.getElementById('coin').innerText = score;
 
-    // Effekt yaratish
+    // Effekt chiqarish funksiyasi
     createScoreEffect(event);
 }
 
@@ -13,17 +13,26 @@ function createScoreEffect(event) {
     effect.innerText = '+1';
     effect.className = 'score-animation';
 
-    // Sichqoncha yoki barmoq bosilgan joyni aniqlash
-    const x = event.clientX || event.touches[0].clientX;
-    const y = event.clientY || event.touches[0].clientY;
+    // Bosilgan joyni aniqlash (Telefon va Kompyuter uchun)
+    let x, y;
+    if (event.touches && event.touches.length > 0) {
+        x = event.touches[0].clientX;
+        y = event.touches[0].clientY;
+    } else {
+        x = event.clientX;
+        y = event.clientY;
+    }
 
     effect.style.left = x + 'px';
     effect.style.top = y + 'px';
 
     document.body.appendChild(effect);
 
-    // 0.8 soniyadan keyin elementni o'chirib tashlash
     setTimeout(() => {
         effect.remove();
     }, 800);
+}
+
+function upgrade() {
+    alert("Tez orada yangi funksiyalar qo'shiladi!");
 }
