@@ -1,67 +1,29 @@
-const tg = window.Telegram.WebApp;
-tg.expand();
+let coin = Number(localStorage.getItem("coin")) || 0;
+let power = Number(localStorage.getItem("power")) || 1;
 
-let score = 0;
-let power = 1; // Har bir tap uchun beriladigan ball
+// Sahifa yuklanganda sonni ko'rsatish
+window.onload = function() {
+    document.getElementById("coin").innerText = coin;
+};
 
-// 1. Telegram bazasidan ball va kuchni yuklab olish
-tg.CloudStorage.getItems(['userScore', 'userPower'], (err, values) => {
-    if (!err) {
-        if (values.userScore) score = parseInt(values.userScore);
-        if (values.userPower) power = parseInt(values.userPower);
-        
-        document.getElementById('coin').innerText = score;
-        updateUpgradeButton(); 
-    }
-});
-
-function tap(event) {
-    score += power; 
-    document.getElementById('coin').innerText = score;
-
-    // Ballni saqlash
-    tg.CloudStorage.setItem('userScore', score.toString());
-
-    createScoreEffect(event);
+function updateCoin() {
+    document.getElementById("coin").innerText = coin;
+    // XOTIRAGA SAQLASH
+    localStorage.setItem("coin", coin);
+    localStorage.setItem("power", power);
 }
 
-function createScoreEffect(event) {
-    const effect = document.createElement('div');
-    effect.innerText = '+' + power;
-    effect.className = 'score-animation';
-
-    let x = (event.touches && event.touches[0]) ? event.touches[0].clientX : event.clientX;
-    let y = (event.touches && event.touches[0]) ? event.touches[0].clientY : event.clientY;
-
-    effect.style.left = x + 'px';
-    effect.style.top = y + 'px';
-
-    document.body.appendChild(effect);
-    setTimeout(() => effect.remove(), 800);
+function tap() {
+    coin += power;
+    updateCoin();
 }
 
-// MANA SHU FUNKSIYA ENDI ISHLAYDI:
 function upgrade() {
-    let cost = power * 100; // Upgrade narxi
-
-    if (score >= cost) {
-        score -= cost; // Pulni yechib olish
-        power += 1;    // Kuchni oshirish (endi +2, +3 beradi)
-        
-        document.getElementById('coin').innerText = score;
-        
-        // Yangi ma'lumotlarni Telegramga saqlash
-        tg.CloudStorage.setItem('userScore', score.toString());
-        tg.CloudStorage.setItem('userPower', power.toString());
-        
-        updateUpgradeButton();
-        tg.showAlert("Muvaffaqiyatli! Endi har bir tap " + power + " coin beradi.");
+    if (coin >= 10) {
+        coin -= 10;
+        power++;
+        updateCoin();
     } else {
-        tg.showAlert("Mablag' yetarli emas! Sizga yana " + (cost - score) + " coin kerak.");
+        alert("Coin yetarli emas!");
     }
-}
-
-function updateUpgradeButton() {
-    let cost = power * 100;
-    document.getElementById('upgrade-btn').innerText = "UPGRADE (Narxi: " + cost + ")";
 }
