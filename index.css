@@ -1,0 +1,20 @@
+/* Bu tugmaning umumiy ko'rinishi */
+button {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.1s ease;
+    border-radius: 50%; /* Tugmani yumaloq qiladi */
+    background: radial-gradient(circle, #f39c12, #d35400); /* Hamster rangiga yaqin */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    outline: none;
+}
+
+/* Bu siz yozgan kod - bosilgandagi effekt */
+button:active {
+    transform: scale(0.9);
+}

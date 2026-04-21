@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+
+    <h1>💰 Coin: <span id="coin">0</span></h1>
+
+    <button onclick="addCoin()" style="font-size:30px; padding: 20px;">
+        TAP 💥
+    </button>
+
+    <br><br>
+
+    <button onclick="upgrade()">UPGRADE 🚀</button>
+
+    <script>
+        let coin = 0;
+        let power = 1; // Har bosganda qancha qo'shilishi
+
+        function addCoin() {
+            coin += power;
+            document.getElementById("coin").innerText = coin;
+        }
+
+        function upgrade() {
+            if (coin >= 10) { // Masalan, upgrade 10 coin turadi
+                coin -= 10;
+                power += 1;
+                document.getElementById("coin").innerText = coin;
+                alert("Upgrade qilindi! Endi har bosishda " + power + " coin!");
+            } else {
+                alert("Coin yetarli emas!");
+            }
+        }
+    </script>
+
+</body>
+</html>
