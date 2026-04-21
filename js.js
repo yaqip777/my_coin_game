@@ -1,29 +1,29 @@
-let coin = Number(localStorage.getItem("coin")) || 0;
-let power = Number(localStorage.getItem("power")) || 1;
+let score = 0;
 
-// Sahifa yuklanganda sonni ko'rsatish
-window.onload = function() {
-    document.getElementById("coin").innerText = coin;
-};
+function tap(event) {
+    score++;
+    document.getElementById('coin').innerText = score;
 
-function updateCoin() {
-    document.getElementById("coin").innerText = coin;
-    // XOTIRAGA SAQLASH
-    localStorage.setItem("coin", coin);
-    localStorage.setItem("power", power);
+    // Effekt yaratish
+    createScoreEffect(event);
 }
 
-function tap() {
-    coin += power;
-    updateCoin();
-}
+function createScoreEffect(event) {
+    const effect = document.createElement('div');
+    effect.innerText = '+1';
+    effect.className = 'score-animation';
 
-function upgrade() {
-    if (coin >= 10) {
-        coin -= 10;
-        power++;
-        updateCoin();
-    } else {
-        alert("Coin yetarli emas!");
-    }
+    // Sichqoncha yoki barmoq bosilgan joyni aniqlash
+    const x = event.clientX || event.touches[0].clientX;
+    const y = event.clientY || event.touches[0].clientY;
+
+    effect.style.left = x + 'px';
+    effect.style.top = y + 'px';
+
+    document.body.appendChild(effect);
+
+    // 0.8 soniyadan keyin elementni o'chirib tashlash
+    setTimeout(() => {
+        effect.remove();
+    }, 800);
 }
