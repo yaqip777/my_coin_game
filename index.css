@@ -1,29 +1,22 @@
-body {
-    text-align: center;
-    background: #2c3e50;
-    color: white;
-    font-family: sans-serif;
+* {
+    -webkit-tap-highlight-color: transparent;
 }
-
-.game {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#coin-btn {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.1s;
     margin-top: 50px;
 }
 
-#coinImg {
-    width: 250px;
-    cursor: pointer;
-    margin: 20px 0;
+#coin-img {
+    width: 250px; /* Tanganing kattaligi */
+    height: 250px;
+    object-fit: contain;
 }
 
-#coinImg:active {
-    transform: scale(0.95);
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
+/* Tanga bosilganda effekt */
+#coin-btn:active {
+    transform: scale(0.9);
 }
