@@ -64,6 +64,6 @@ function checkLevel() {
     } else if (score >= 100000) { 
         coinImg.src = 'coin2.png';
     } else {
-        coinImg.src = 'coin1.png';
+        coinImg.src = 'coin.png';
     }
 }
