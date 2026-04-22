@@ -4,11 +4,12 @@ let upgradeCost = localStorage.getItem('upgradeCost') ? parseInt(localStorage.ge
 
 document.getElementById('coin').innerText = score;
 updateUpgradeButtonText();
-
+checkLevel();
 function tap(event) {
     score += tapValue;
     document.getElementById('coin').innerText = score;
     localStorage.setItem('myScore', score);
+    checkLevel();
     createScoreEffect(event);
 }
 
@@ -33,8 +34,8 @@ function upgrade() {
         localStorage.setItem('tapValue', tapValue);
         localStorage.setItem('upgradeCost', upgradeCost);
         document.getElementById('coin').innerText = score;
+        checkLevel();
         updateUpgradeButtonText();
-        
         const btn = document.getElementById('upgrade-btn');
         btn.style.background = "linear-gradient(135deg, #4CAF50, #81C784)";
         setTimeout(() => { btn.style.background = ""; }, 500);
@@ -50,5 +51,19 @@ function updateUpgradeButtonText() {
     const btn = document.getElementById('upgrade-btn');
     if (btn) {
         btn.innerText = "UPGRADE 🚀 (" + upgradeCost + ")";
+    }
+}
+function checkLevel() {
+    const coinImg = document.getElementById('coin-img');
+    if (!coinImg) return;
+
+    if (score >= 10000000) { 
+        coinImg.src = 'coin4.png';
+    } else if (score >= 1000000) { 
+        coinImg.src = 'coin3.png';
+    } else if (score >= 100000) { 
+        coinImg.src = 'coin2.png';
+    } else {
+        coinImg.src = 'coin1.png';
     }
 }
