@@ -1,15 +1,16 @@
-// 1. Ball va tap kuchini xotiradan olish
+// 1. Ma'lumotlarni xotiradan yuklash
 let score = localStorage.getItem('myScore') ? parseInt(localStorage.getItem('myScore')) : 0;
 let tapValue = localStorage.getItem('tapValue') ? parseInt(localStorage.getItem('tapValue')) : 1;
-let upgradeCost = 100;
+let upgradeCost = localStorage.getItem('upgradeCost') ? parseInt(localStorage.getItem('upgradeCost')) : 100;
 
-// 2. Sahifa yuklanganda ballni ekranda ko'rsatish
+// Sahifa yuklanganda ekranni yangilash
 document.getElementById('coin').innerText = score;
+updateUpgradeButtonText();
 
 function tap(event) {
-    score += tapValue; 
+    score += tapValue;
     document.getElementById('coin').innerText = score;
-    localStorage.setItem('myScore', score); 
+    localStorage.setItem('myScore', score);
     createScoreEffect(event);
 }
 
@@ -34,18 +35,33 @@ function createScoreEffect(event) {
     setTimeout(() => { effect.remove(); }, 800);
 }
 
-// 3. Upgrade tugmasi bosilganda ishlaydigan yangi funksiya
 function upgrade() {
     if (score >= upgradeCost) {
-        score -= upgradeCost;
-        tapValue += 1; // Har bosganda beriladigan ballni oshirish
+        score -= upgradeCost; // Ballni ayirish
+        tapValue += 1;        // Kuchni oshirish
         
+        // Narxni oshirish (masalan, 2 barobarga)
+        upgradeCost = upgradeCost * 2; 
+        
+        // Hamma yangi ma'lumotlarni saqlash
         localStorage.setItem('myScore', score);
         localStorage.setItem('tapValue', tapValue);
+        localStorage.setItem('upgradeCost', upgradeCost);
         
+        // Ekranni yangilash
         document.getElementById('coin').innerText = score;
-        alert("Tabriklaymiz! Endi har bir bosish: +" + tapValue);
+        updateUpgradeButtonText();
+        
+        alert("Upgrade! Endi har bir bosish: +" + tapValue + ". Keyingi narx: " + upgradeCost);
     } else {
-        alert("Mablag' yetarli emas! Sizga 100 ball kerak.");
+        alert("Mablag' yetarli emas! Sizga " + upgradeCost + " ball kerak.");
+    }
+}
+
+// Tugma ichidagi yozuvni yangilash (Narxni ko'rsatib turish uchun)
+function updateUpgradeButtonText() {
+    const btn = document.getElementById('upgrade-btn');
+    if (btn) {
+        btn.innerText = "UPGRADE 🚀 (" + upgradeCost + ")";
     }
 }
