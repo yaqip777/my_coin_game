@@ -41,24 +41,35 @@ function upgrade() {
         tapValue += 1;        // Kuchni oshirish
         
         // Narxni oshirish (masalan, 2 barobarga)
-        upgradeCost = upgradeCost * 2; 
+      function upgrade() {
+    if (score >= upgradeCost) {
+        score -= upgradeCost;
+        tapValue += 1;
+        upgradeCost = upgradeCost * 2;
         
-        // Hamma yangi ma'lumotlarni saqlash
         localStorage.setItem('myScore', score);
         localStorage.setItem('tapValue', tapValue);
         localStorage.setItem('upgradeCost', upgradeCost);
         
-        // Ekranni yangilash
         document.getElementById('coin').innerText = score;
         updateUpgradeButtonText();
-        
-        alert("Upgrade! Endi har bir bosish: +" + tapValue + ". Keyingi narx: " + upgradeCost);
+
+        // Tugmani yashil qilish
+        const btn = document.getElementById('upgrade-btn');
+        btn.style.background = "linear-gradient(135deg, #4CAF50, #81C784)";
+        setTimeout(() => {
+            btn.style.background = "linear-gradient(135deg, #6e8efb, #a777e3)";
+        }, 500);
+
     } else {
-        alert("Mablag' yetarli emas! Sizga " + upgradeCost + " ball kerak.");
+        // Siltash effekti
+        const btn = document.getElementById('upgrade-btn');
+        btn.style.animation = "shake 0.5s";
+        setTimeout(() => btn.style.animation = "", 500);
+        alert("Mablag' yetarli emas! Sizga yana " + (upgradeCost - score) + " coin kerak.");
     }
 }
 
-// Tugma ichidagi yozuvni yangilash (Narxni ko'rsatib turish uchun)
 function updateUpgradeButtonText() {
     const btn = document.getElementById('upgrade-btn');
     if (btn) {
