@@ -1,25 +1,21 @@
-// O'yin yuklanganda saqlangan ballni olish, agar bo'lmasa 0 deb olish
+// 1. Ball va tap kuchini xotiradan olish
 let score = localStorage.getItem('myScore') ? parseInt(localStorage.getItem('myScore')) : 0;
+let tapValue = localStorage.getItem('tapValue') ? parseInt(localStorage.getItem('tapValue')) : 1;
+let upgradeCost = 100;
 
-// Sahifa yuklanganda ballni ekranda ko'rsatish
+// 2. Sahifa yuklanganda ballni ekranda ko'rsatish
 document.getElementById('coin').innerText = score;
 
 function tap(event) {
-    score++;
-    
-    // Yangi ballni ekranga chiqarish
+    score += tapValue; 
     document.getElementById('coin').innerText = score;
-    
-    // Ballni xotiraga (localStorage) saqlash
-    localStorage.setItem('myScore', score);
-
-    // Effekt chiqarish funksiyasi
+    localStorage.setItem('myScore', score); 
     createScoreEffect(event);
 }
 
 function createScoreEffect(event) {
     const effect = document.createElement('div');
-    effect.innerText = '+1';
+    effect.innerText = '+' + tapValue;
     effect.className = 'score-animation';
 
     let x, y;
@@ -33,14 +29,23 @@ function createScoreEffect(event) {
 
     effect.style.left = x + 'px';
     effect.style.top = y + 'px';
-
     document.body.appendChild(effect);
 
-    setTimeout(() => {
-        effect.remove();
-    }, 800);
+    setTimeout(() => { effect.remove(); }, 800);
 }
 
+// 3. Upgrade tugmasi bosilganda ishlaydigan yangi funksiya
 function upgrade() {
-    alert("Tez orada yangi funksiyalar qo'shiladi!");
+    if (score >= upgradeCost) {
+        score -= upgradeCost;
+        tapValue += 1; // Har bosganda beriladigan ballni oshirish
+        
+        localStorage.setItem('myScore', score);
+        localStorage.setItem('tapValue', tapValue);
+        
+        document.getElementById('coin').innerText = score;
+        alert("Tabriklaymiz! Endi har bir bosish: +" + tapValue);
+    } else {
+        alert("Mablag' yetarli emas! Sizga 100 ball kerak.");
+    }
 }
