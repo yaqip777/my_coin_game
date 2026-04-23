@@ -111,7 +111,7 @@ function checkLevel() {
         coinImg.src = 'coin4.png';
     } else if (score >= 1000000) {
         coinImg.src = 'coin3.png';
-    } else if (score >= 20000) {
+    } else if (score >= 100000) {
         coinImg.src = 'coin2.png';
     } else {
         coinImg.src = 'coin.png';
